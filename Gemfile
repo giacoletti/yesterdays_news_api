@@ -8,6 +8,7 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rack-cors'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'factory_bot_rails'

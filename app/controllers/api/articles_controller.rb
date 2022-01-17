@@ -1,17 +1,19 @@
 class Api::ArticlesController < ApplicationController
   before_action :validate_params_presence, only: [:create]
   def index
-    latest_articles = if params['category'].nil?
-                        Article.by_recently_created.limit(20)
-                      else
-                        Article.where(category: params['category']).by_recently_created.limit(20)
-                      end
-    render json: { articles: latest_articles }
+    articles = if params['category'].nil?
+                 Article.by_recently_created.limit(20)
+               else
+                 Article.where(category: params['category']).by_recently_created.limit(20)
+               end
+    # render json: { articles: articles }
+    render json: articles, each_serializer: Article::IndexSerializer
   end
 
   def show
     article = Article.find(params['id'])
-    render json: { article: article }
+    # render json: { article: article }
+    render json: article, serializer: Article::ShowSerializer
   rescue ActiveRecord::RecordNotFound => e
     render_error('Article not found', 404)
   end
