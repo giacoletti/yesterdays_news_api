@@ -31,7 +31,7 @@ RSpec.describe 'GET /api/articles', type: :request do
       end
 
       it 'is expected to respond with a collection of articles with "politics" category' do
-        expect(response_json['articles'].all? { |article| article['category'] == 'politics' })
+        expect(response_json['articles'].all? { |article| article['category'] == 'Politics' })
           .to eq true
       end
     end
