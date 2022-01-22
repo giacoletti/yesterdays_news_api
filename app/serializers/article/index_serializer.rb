@@ -1,5 +1,5 @@
 class Article::IndexSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :published, :category
+  attributes :id, :title, :published, :category
 
   def published
     object.created_at
