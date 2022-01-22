@@ -1,6 +1,7 @@
 RSpec.describe 'GET /api/articles', type: :request do
   subject { response }
-  let!(:article) { 30.times { create(:article, title: 'Covid-19 is a pandemic') } }
+  let!(:category) { create(:category, name: 'politics') }
+  let!(:article) { 30.times { create(:article, title: 'Covid-19 is a pandemic', category_id: category.id ) } }
 
   describe 'successfully' do
     describe 'without params' do

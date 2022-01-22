@@ -7,7 +7,8 @@ class Api::ArticlesController < ApplicationController
     articles = if params['category'].nil?
                  Article.by_recently_created.limit(20)
                else
-                 Article.where(category: params['category']).by_recently_created.limit(20)
+                 category = Category.where name: params['category']
+                 Article.where(category: category).by_recently_created.limit(20)
                end
     render json: articles, each_serializer: Article::IndexSerializer
   end
