@@ -19,6 +19,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'pundit-matchers', '~> 1.7.0'
 end
 
 group :development do
