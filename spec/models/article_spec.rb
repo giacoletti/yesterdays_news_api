@@ -3,6 +3,7 @@ RSpec.describe Article, type: :model do
     it { is_expected.to have_db_column :title }
     it { is_expected.to have_db_column :body }
     it { is_expected.to have_db_column :category_id }
+    it { is_expected.to have_db_column :user_id }
   end
 
   describe 'Validations' do

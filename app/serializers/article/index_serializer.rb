@@ -1,5 +1,5 @@
 class Article::IndexSerializer < ActiveModel::Serializer
-  attributes :id, :title, :teaser, :published, :category
+  attributes :id, :title, :teaser, :published, :category, :user
 
   def published
     object.created_at.to_formatted_s(:long)
@@ -11,5 +11,9 @@ class Article::IndexSerializer < ActiveModel::Serializer
 
   def teaser
     object.body[0, 60] + '...'
+  end
+
+  def user
+    object.user.name
   end
 end

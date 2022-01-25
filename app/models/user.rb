@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   validates_presence_of :name
-
+  has_many :articles
   enum role: { editor: 1, journalist: 2 }
 
   def is_staff?
