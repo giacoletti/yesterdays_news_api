@@ -19,7 +19,12 @@ class Api::ArticlesController < ApplicationController
                else
                  Article.by_recently_created.limit(20)
                end
-    render json: articles, each_serializer: Article::IndexSerializer
+
+    if articles.any?
+      render json: articles, each_serializer: Article::IndexSerializer
+    else
+      render_error('Articles not found', 404)
+    end
   end
 
   def show
