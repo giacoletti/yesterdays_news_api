@@ -4,6 +4,7 @@ RSpec.describe 'GET /api/articles', type: :request do
   let(:user) { create(:user, role: 'journalist') }
   let!(:category) { create(:category, name: 'politics') }
   let!(:article) { 30.times { create(:article, category: category, user: journalist) } }
+  # let!(:article_image) { create(:article, category: category, user: journalist, image: image) }
 
   describe 'successfully' do
     describe 'without params' do
@@ -18,7 +19,8 @@ RSpec.describe 'GET /api/articles', type: :request do
       end
 
       it 'is expected to respond with an article with title "This is a wonderful header"' do
-        expect(response_json['articles'].first['title']).to eq 'This is a wonderful header'
+        binding.pry
+        ry.expect(response_json['articles'].first['title']).to eq 'This is a wonderful header'
       end
     end
 

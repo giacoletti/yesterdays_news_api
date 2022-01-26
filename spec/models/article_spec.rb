@@ -21,10 +21,11 @@ RSpec.describe Article, type: :model do
   describe 'Image' do
     it 'is expected to be attached' do
       subject.image.attach(
-        io(File.open(fixture_path + '/dummy_image.png'),
-           filename: 'attachment.png',
-           content_type: 'image/png')
+        io: File.open(fixture_path + '/dummy_image.jpg'),
+        filename: 'attachment.jpg',
+        content_type: 'image/jpg'
       )
+      binding.pry
       expect(subject.image).to be_attached
     end
   end
