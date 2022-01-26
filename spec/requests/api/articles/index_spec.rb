@@ -1,6 +1,7 @@
 RSpec.describe 'GET /api/articles', type: :request do
   subject { response }
   let(:journalist) { create(:user, role: 'journalist') }
+  let(:user) { create(:user, role: 'journalist') }
   let!(:category) { create(:category, name: 'politics') }
   let!(:article) { 30.times { create(:article, category: category, user: journalist) } }
 
@@ -38,17 +39,28 @@ RSpec.describe 'GET /api/articles', type: :request do
       end
     end
 
-    describe 'belongs to a journalist' do
-      describe 'without params' do
+    describe 'with a journalist param' do
+      before do
+        get '/api/articles', params: { user: journalist.email }
+      end
+
+      it { is_expected.to have_http_status :ok }
+
+      it 'is expected to respond with a collection of a users articles' do
+        expect(response_json['articles'].all? { |article| article['user'] == journalist.email })
+          .to eq true
+      end
+
+      describe 'when a journalist has no articles' do
         before do
-          get '/api/articles'
+          get '/api/articles', params: { user: user }
         end
 
         it { is_expected.to have_http_status :ok }
 
-        it 'is expected to respond with a collection of articles a users articles' do
-          expect(response_json['articles'].all? { |article| article['user'] == journalist.email })
-            .to eq true
+        it 'is expected to return an error message' do
+          binding.pry
+          expect(response_json['message']).to eq 'Articles not found'
         end
       end
     end

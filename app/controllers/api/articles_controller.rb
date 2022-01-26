@@ -4,11 +4,20 @@ class Api::ArticlesController < ApplicationController
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def index
-    articles = if params['category'].nil?
+    articles = if params.keys.length == 2
+
                  Article.by_recently_created.limit(20)
-               else
+               elsif params.include?('category')
+
                  category = Category.where name: params['category']
                  Article.where(category: category).by_recently_created.limit(20)
+
+               elsif params.include?('user')
+
+                 user = User.where email: params['user']
+                 Article.where(user: user).by_recently_created
+               else
+                 Article.by_recently_created.limit(20)
                end
     render json: articles, each_serializer: Article::IndexSerializer
   end
