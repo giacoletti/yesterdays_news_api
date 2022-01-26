@@ -59,7 +59,6 @@ RSpec.describe 'GET /api/articles', type: :request do
         it { is_expected.to have_http_status :ok }
 
         it 'is expected to return an error message' do
-          binding.pry
           expect(response_json['message']).to eq 'Articles not found'
         end
       end
