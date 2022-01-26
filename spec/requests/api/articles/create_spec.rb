@@ -1,7 +1,7 @@
 RSpec.describe 'POST /api/articles', type: :request do
   subject { response }
-  let(:journalist) { create(:user, role: 'journalist') }
-  let(:user) { create(:user, role: nil) }
+  let!(:journalist) { create(:user, role: 'journalist') }
+  let!(:user) { create(:user, role: nil) }
   let(:credentials) { journalist.create_new_auth_token }
   let(:non_staff_credentials) { user.create_new_auth_token }
   let!(:category) { create(:category, name: 'news') }
@@ -13,7 +13,8 @@ RSpec.describe 'POST /api/articles', type: :request do
           article: {
             title: 'Mars and Venus together',
             body: 'There is water on Mars',
-            category: 'news'
+            category: 'news',
+            user: user.email
           }
         }, headers: credentials
         @article = Article.last
