@@ -13,23 +13,27 @@ category_politics = Category.create(name: 'politics')
 category_economy = Category.create(name: 'economy')
 category_news = Category.create(name: 'news')
 
-articles = [{ title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy  },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news },
-            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news }]
+journalist_1 = User.create(name: Faker::Name.name, email: Faker::Internet.unique.email, password: '1234567890', role: 'journalist')
+journalist_2 = User.create(name: Faker::Name.name, email: Faker::Internet.unique.email, password: '1234567890', role: 'journalist')
+journalist_3 = User.create(name: Faker::Name.name, email: Faker::Internet.unique.email, password: '1234567890', role: 'journalist')
+
+articles = [{ title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports, user: journalist_1 },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports, user: journalist_1  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports, user: journalist_2  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_sports, user: journalist_3  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics, user: journalist_1  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics, user: journalist_3  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics, user: journalist_2  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_politics, user: journalist_3  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy, user: journalist_2 },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy, user: journalist_1  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy, user: journalist_1  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_economy, user: journalist_2  },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news, user: journalist_1 },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news, user: journalist_3 },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news, user: journalist_2 },
+            { title: Faker::Book.title, body: Faker::Quote.matz, category: category_news, user: journalist_1 }]
 
 articles.each do |article|
-  Article.create(title: article[:title], body: article[:body], category: article[:category])
+  Article.create(title: article[:title], body: article[:body], category: article[:category], user: article[:user])
 end
