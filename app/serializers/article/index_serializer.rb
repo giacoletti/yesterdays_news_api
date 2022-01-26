@@ -14,6 +14,6 @@ class Article::IndexSerializer < ActiveModel::Serializer
   end
 
   def user
-    object.user.name
+    object.user.email
   end
 end
