@@ -6,7 +6,7 @@ class Article < ApplicationRecord
   has_one_attached :image
 
   def serialized
-    binding.pry
+    
     {
       id: id,
       title: title,
@@ -18,9 +18,4 @@ class Article < ApplicationRecord
              end
     }
   end
-  # 
-  # This is how Thomas serialized the article in the index action. 
-  # He also changed the index action to => render json: { articles: serialized_articles(articles) }, each_serializer: Article::IndexSerializer
-  # If I did that it worked but it removed alot of other bodies in the article. 
-
 end

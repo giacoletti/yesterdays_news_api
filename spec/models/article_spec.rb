@@ -25,7 +25,7 @@ RSpec.describe Article, type: :model do
         filename: 'attachment.jpg',
         content_type: 'image/jpg'
       )
-      binding.pry
+
       expect(subject.image).to be_attached
     end
   end
