@@ -6,7 +6,6 @@ class Article < ApplicationRecord
   has_one_attached :image
 
   def serialized
-    
     {
       id: id,
       title: title,
