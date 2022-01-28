@@ -29,7 +29,7 @@ RSpec.describe Article::IndexSerializer, type: :serializer do
         'user' => an_instance_of(String),
         'published' => an_instance_of(String),
         'author' => an_instance_of(String),
-        'image' => { 'image' => an_instance_of(String) }
+        'image' => an_instance_of(String)
       }
     )
   end
