@@ -7,8 +7,7 @@ class Article < ApplicationRecord
 
   def serialized
     {
-      id: id,
-      title: title,
+
       image: if Rails.env.test?
                ActiveStorage::Blob.service.path_for(image.key)
              else
