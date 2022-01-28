@@ -1,5 +1,5 @@
 class Article::ShowSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :category, :published, :author
+  attributes :id, :title, :body, :category, :published, :author, :image
 
   def published
     object.created_at.to_formatted_s(:long)
@@ -11,5 +11,9 @@ class Article::ShowSerializer < ActiveModel::Serializer
 
   def author
     object.user.name
+  end
+
+  def image
+    object.serialized
   end
 end
